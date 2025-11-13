@@ -1,0 +1,3487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tran The Hai - Investment Banking & Finance</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-white: #ffffff;
+            --secondary-white: #f8fafc;
+            --accent-blue: #0D47A1;
+            --accent-indigo: #1565C0;
+            --accent-purple: #1976D2;
+            --accent-gold: #f59e0b;
+            --text-dark: #1e293b;
+            --text-gray: #64748b;
+            --text-light: #94a3b8;
+            --border-light: #e2e8f0;
+            --shadow-light: rgba(15, 23, 42, 0.08);
+            --gradient-primary: linear-gradient(135deg, #1565C0 25%, #1976D2 50%, #1E88E5 75%, #2196F3 100%);
+            --gradient-gold: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+            --glass-white: rgba(255, 255, 255, 0.95);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-white);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            cursor: none;
+            line-height: 1.6;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 24px;
+            height: 24px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.15s ease;
+            box-shadow: 0 0 20px rgba(13, 71, 161, 0.3);
+        }
+
+        .cursor-trail {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.6;
+            animation: fadeOut 1.2s ease-out forwards;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: scale(0);
+            }
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: var(--primary-white);
+        }
+
+        .bg-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(13, 71, 161, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(13, 71, 161, 0.04) 1px, transparent 1px);
+            background-size: 80px 80px;
+            animation: gridMove 25s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(80px, 80px); }
+        }
+
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.08;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .shape:nth-child(1) {
+            top: 15%;
+            right: 10%;
+            width: 120px;
+            height: 120px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            top: 60%;
+            left: 5%;
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-gold);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            animation-delay: 7s;
+        }
+
+        .shape:nth-child(3) {
+            bottom: 20%;
+            right: 25%;
+            width: 60px;
+            height: 60px;
+            background: var(--accent-indigo);
+            transform: rotate(45deg);
+            animation-delay: 14s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-40px) rotate(120deg);
+            }
+            66% {
+                transform: translateY(20px) rotate(240deg);
+            }
+        }
+
+        /* Left Navigation */
+        .nav-vertical {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 90px;
+            background: var(--glass-white);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--border-light);
+            box-shadow: 4px 0 20px var(--shadow-light);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 0;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-vertical:hover {
+            width: 220px;
+        }
+
+        .nav-logo {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            font-size: 1.4rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            margin-bottom: 3rem;
+            transition: all 0.4s ease;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(13, 71, 161, 0.2);
+        }
+        .nav-logo {
+  width: 40px;   /* chỉnh lại cho bằng kích thước chữ TTH trước đó */
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%; /* làm tròn hình */
+}
+
+        .nav-vertical:hover .nav-logo {
+            writing-mode: horizontal-tb;
+            text-orientation: upright;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            flex: 1;
+            justify-content: center;
+            align-items: flex-start;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-vertical:hover .nav-links {
+            transform: translateX(-60px);
+        }
+
+        .nav-item {
+            position: relative;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 100%;
+            right: -20px;
+            background: var(--gradient-primary);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .nav-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .nav-item:hover {
+            background: rgba(13, 71, 161, 0.05);
+            transform: translateX(5px);
+        }
+
+        .nav-icon {
+            width: 26px;
+            height: 26px;
+            fill: var(--text-gray);
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.nav-leadership .nav-icon {
+            padding-right: 9px;
+        }
+
+        .nav-item:hover .nav-icon {
+            fill: var(--accent-blue);
+            transform: scale(1.1);
+        }
+
+        .nav-text {
+            position: absolute;
+            left: 90px;
+            color: var(--text-dark);
+            font-weight: 600;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-size: 0.95rem;
+        }
+
+        .nav-vertical:hover .nav-text {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--primary-white) 0%, var(--secondary-white) 100%);
+        }
+                
+        .hero .hero-content{ position:relative; z-index:2; }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            padding: 0 3rem;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            letter-spacing: 4px;
+            position: relative;
+            animation: titleGlow 4s ease-in-out infinite alternate;
+        }
+
+        .hero-title span{
+            display:inline-block;
+            opacity:0;
+            transform: translateY(16px);
+            animation: slideUp 1.5s ease-out forwards;
+            animation-play-state: paused;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.play-title .hero-title span{
+            animation-play-state: running;
+        }
+
+        .hero-title span:nth-child(1)  { animation-delay: .10s; }
+        .hero-title span:nth-child(2)  { animation-delay: .18s; }
+        .hero-title span:nth-child(3)  { animation-delay: .26s; }
+        .hero-title span:nth-child(4)  { animation-delay: .34s; }
+        .hero-title span:nth-child(5)  { animation-delay: .42s; }
+        .hero-title span:nth-child(6)  { animation-delay: .50s; }
+        .hero-title span:nth-child(7)  { animation-delay: .58s; }
+        .hero-title span:nth-child(8)  { animation-delay: .66s; }
+        .hero-title span:nth-child(9)  { animation-delay: .74s; }
+        .hero-title span:nth-child(10) { animation-delay: .82s; }
+        .hero-title span:nth-child(11) { animation-delay: .90s; }
+        .hero-title span:nth-child(12) { animation-delay: .98s; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(16px) scale(.98); }
+            to   { opacity: 1; transform: translateY(0)    scale(1); }
+        }
+
+        @keyframes titleGlow {
+            0%   { filter: drop-shadow(0 5px 15px rgba(13, 71, 161, .18)); transform: translateY(0); }
+            100% { filter: drop-shadow(0 8px 25px rgba(25, 118, 210, .25)); transform: translateY(-2px); }
+        }
+
+        .hero-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 4px;
+            background: var(--gradient-gold);
+            border-radius: 2px;
+            box-shadow: 0 2px 10px rgba(245, 158, 11, 0.4);
+        }
+
+        .hero-tagline {
+            font-size: 1.4rem;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-gray);
+            margin-bottom: 3.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 600;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow-light);
+        }
+
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .cta-btn:hover::before {
+            left: 100%;
+        }
+
+        .cta-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 15px 40px rgba(13, 71, 161, 0.3);
+        }
+
+        .cta-secondary {
+            background: var(--primary-white);
+            color: var(--accent-blue);
+            border: 2px solid var(--accent-blue);
+            box-shadow: 0 15px 40px var(--shadow-light);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 50px rgba(13, 71, 161, 0.4);
+        }
+
+        .cta-secondary:hover {
+            background: var(--accent-blue);
+            color: white;
+            border-color: var(--accent-blue);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-tagline,
+        .hero-description,
+        .cta-buttons {
+            opacity: 0; 
+            animation: fadeIn 1.2s ease forwards;
+            animation-play-state: paused;
+        }
+
+        body.play-title .hero-tagline,
+        body.play-title .hero-description,
+        body.play-title .cta-buttons {
+            animation-play-state: running;
+        }
+
+        .hero-tagline { animation-delay: 1.2s; }
+        .hero-description { animation-delay: 1.8s; }
+        .cta-buttons { animation-delay: 2.4s; }
+
+        /* Financial Chart Animation */
+        .chart-container {
+            position: absolute;
+            bottom: 15%;
+            right: 10%;
+            width: 220px;
+            height: 140px;
+            opacity: 0.7;
+            background: var(--glass-white);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 10px 30px var(--shadow-light);
+        }
+
+        .chart-bar {
+            position: absolute;
+            bottom: 20px;
+            width: 25px;
+            background: var(--gradient-primary);
+            border-radius: 4px 4px 0 0;
+            animation: chartGrow 3s ease-in-out infinite;
+            box-shadow: 0 2px 10px rgba(13, 71, 161, 0.2);
+        }
+
+        .chart-bar:nth-child(1) { left: 20px; height: 40px; animation-delay: 0s; }
+        .chart-bar:nth-child(2) { left: 50px; height: 70px; animation-delay: 0.3s; }
+        .chart-bar:nth-child(3) { left: 80px; height: 90px; animation-delay: 0.6s; }
+        .chart-bar:nth-child(4) { left: 110px; height: 60px; animation-delay: 0.9s; }
+        .chart-bar:nth-child(5) { left: 140px; height: 100px; animation-delay: 1.2s; }
+
+        @keyframes chartGrow {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(1.2); }
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 8rem 3rem;
+            max-width: 1300px;
+            margin: 0 auto;
+            position: relative;
+            justify-content: center;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            position: relative;
+            letter-spacing: 2px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: var(--gradient-gold);
+            border-radius: 2px;
+        }
+
+        /* Glass Cards */
+        .glass-card {
+            background: var(--glass-white);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-light);
+            border-radius: 25px;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px var(--shadow-light);
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(13, 71, 161, 0.05), transparent);
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover::before {
+            animation: shimmer 1.5s ease-in-out;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(13, 71, 161, 0.3);
+            box-shadow: 0 25px 60px rgba(13, 71, 161, 0.15);
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 450px;
+            background: var(--gradient-primary);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            position: relative;
+            overflow: hidden;
+            color: white;
+            box-shadow: 0 20px 50px rgba(13, 71, 161, 0.3);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            border-radius: 25px;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><circle cx="200" cy="200" r="150" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"><animate attributeName="r" values="150;160;150" dur="4s" repeatCount="indefinite"/></circle><circle cx="200" cy="200" r="100" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"><animate attributeName="r" values="100;110;100" dur="3s" repeatCount="indefinite"/></circle></svg>') center/cover;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: var(--glass-white);
+            border-radius: 20px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 8px 25px var(--shadow-light);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(13, 71, 161, 0.1);
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.8rem;
+            font-weight: 900;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-gray);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .stats-container {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap; /* Cho phép xuống hàng khi cần */
+        gap: 10px; /* Khoảng cách giữa các ô */
+        margin: 20px 0;
+    }
+
+    .stat-item {
+        background: #fff;
+        border-radius: 10px;
+        padding: 15px;
+        text-align: center;
+        width: 150px; /* Độ rộng cố định cho mỗi ô */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .stat-number {
+        font-size: 24px;
+        color: #f4a261;
+        margin-bottom: 5px;
+    }
+
+    .stat-label {
+        font-size: 14px;
+        color: #6c757d;
+    }
+
+    /* Social Work Grid Layout */
+.social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.social-card {
+    background: var(--glass-white);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border-light);
+    border-radius: 20px;
+    padding: 2rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 25px var(--shadow-light);
+    position: relative;
+    overflow: hidden;
+}
+
+.social-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(13, 71, 161, 0.03), transparent);
+    transform: rotate(45deg);
+    transition: all 0.3s ease;
+}
+
+.social-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(13, 71, 161, 0.3);
+    box-shadow: 0 15px 40px rgba(13, 71, 161, 0.12);
+}
+
+.social-card:hover::before {
+    animation: shimmer 1.5s ease-in-out;
+}
+
+.social-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.social-icon-wrap {
+    width: 50px;
+    height: 50px;
+    background: var(--gradient-primary);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(13, 71, 161, 0.3);
+}
+
+.social-icon-wrap svg {
+    width: 26px;
+    height: 26px;
+    fill: white;
+}
+
+.social-title-wrap {
+    flex: 1;
+}
+
+.social-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+    margin-bottom: 0.3rem;
+    line-height: 1.3;
+}
+
+.social-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-gray);
+    font-weight: 600;
+}
+
+.social-content {
+    position: relative;
+    z-index: 1;
+}
+
+.social-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+}
+
+.social-content li {
+    padding-left: 1.5rem;
+    margin-bottom: 0.8rem;
+    position: relative;
+    color: var(--text-dark);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.social-content li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 6px;
+    height: 6px;
+    background: var(--gradient-gold);
+    border-radius: 50%;
+}
+
+.social-images {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+    max-height: 180px; /* Giảm từ 280px xuống 180px để chỉ hiện 2 ảnh + 1 chút */
+    overflow-y: auto;
+    padding-right: 0.5rem;
+    scroll-behavior: smooth;
+}
+
+.social-images::-webkit-scrollbar {
+    width: 6px;
+}
+
+.social-images::-webkit-scrollbar-track {
+    background: rgba(13, 71, 161, 0.05);
+    border-radius: 10px;
+}
+
+.social-images::-webkit-scrollbar-thumb {
+    background: var(--gradient-primary);
+    border-radius: 10px;
+}
+
+.social-images::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-blue);
+}
+
+.social-img-item {
+    aspect-ratio: 16/9; /* Thay đổi tỷ lệ để ảnh ngang hơn */
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-light);
+    box-shadow: 0 2px 8px var(--shadow-light);
+}
+
+.social-img-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.social-img-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(13, 71, 161, 0.15);
+}
+
+.social-img-item:hover img {
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .social-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .social-images {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+}
+/* =====================================================
+   PERSONAL PROJECTS STYLING - REDESIGNED WITH FILTERS
+   ===================================================== */
+
+/* Filter Buttons */
+.projects-filter {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 0.9rem 2rem;
+    background: var(--glass-white);
+    border: 2px solid var(--border-light);
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-gray);
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+}
+
+.filter-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    transform: translate(-50%, -50%);
+    transition: width 0.5s ease, height 0.5s ease;
+    z-index: 0;
+}
+
+.filter-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(13, 71, 161, 0.15);
+    border-color: var(--accent-blue);
+}
+
+.filter-btn.active {
+    background: var(--gradient-primary);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 10px 30px rgba(13, 71, 161, 0.3);
+}
+
+.filter-btn.active::before {
+    width: 100%;
+    height: 100%;
+}
+
+.filter-btn span {
+    position: relative;
+    z-index: 1;
+}
+
+/* Projects Container */
+.projects-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.project-item {
+    display: none;
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.project-item.show {
+    display: block;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* FinMate - Featured Project Card - NEW LAYOUT */
+.project-card.featured {
+    background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(13, 71, 161, 0.02) 100%);
+    border: 2px solid rgba(13, 71, 161, 0.2);
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 15px 50px var(--shadow-light);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.project-card.featured::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: var(--gradient-gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s ease;
+}
+
+.project-card.featured:hover::before {
+    transform: scaleX(1);
+}
+
+.project-card.featured:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 70px rgba(13, 71, 161, 0.25);
+    border-color: rgba(13, 71, 161, 0.35);
+}
+
+/* NEW: Top Section - Images Left, Content Right */
+.featured-top-section {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 3rem;
+    padding: 2.5rem;
+    align-items: start;
+}
+
+.featured-gallery-left {
+    position: sticky;
+    top: 100px;
+}
+
+.featured-content-right {
+    padding-left: 1rem;
+}
+
+.project-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 2rem;
+    background: var(--gradient-gold);
+    color: white;
+    padding: 0.6rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 5px 20px rgba(245, 158, 11, 0.3);
+    letter-spacing: 0.5px;
+    animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+    0%, 100% { box-shadow: 0 5px 20px rgba(245, 158, 11, 0.3); }
+    50% { box-shadow: 0 8px 30px rgba(245, 158, 11, 0.5); }
+}
+
+.project-badge svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+}
+
+.project-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 2.8rem;
+    font-weight: 900;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+    letter-spacing: 1px;
+}
+
+.project-tagline {
+    font-size: 1.2rem;
+    color: var(--text-gray);
+    font-weight: 600;
+    font-style: italic;
+    margin-bottom: 2.5rem;
+}
+
+.project-highlights h4 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.project-highlights h4 svg {
+    width: 22px;
+    height: 22px;
+    fill: var(--accent-blue);
+}
+
+.project-highlights ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2.5rem 0;
+}
+
+.project-highlights li {
+    padding-left: 2rem;
+    margin-bottom: 1.2rem;
+    position: relative;
+    color: var(--text-dark);
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+.project-highlights li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65rem;
+    width: 10px;
+    height: 10px;
+    background: var(--gradient-gold);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
+}
+
+/* FinMate Gallery - Compact Version */
+.project-gallery-compact {
+    background: linear-gradient(135deg, var(--secondary-white), rgba(13, 71, 161, 0.02));
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--border-light);
+    box-shadow: 0 10px 30px var(--shadow-light);
+}
+
+.project-gallery-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+}
+
+.project-gallery-track {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+}
+
+.project-gallery-slide {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+    cursor: pointer;
+    background: #f8f9fa;
+}
+
+.project-gallery-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.4s ease;
+}
+
+.project-gallery-slide:hover img {
+    transform: scale(1.05);
+}
+
+/* Gallery Controls */
+.project-gallery-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid var(--border-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.project-gallery-btn:hover {
+    background: var(--accent-blue);
+    transform: translateY(-50%) scale(1.15);
+    box-shadow: 0 8px 30px rgba(13, 71, 161, 0.4);
+}
+
+.project-gallery-btn:hover svg {
+    fill: white;
+}
+
+.project-gallery-btn.prev {
+    left: 15px;
+}
+
+.project-gallery-btn.next {
+    right: 15px;
+}
+
+.project-gallery-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--accent-blue);
+    transition: fill 0.3s ease;
+}
+
+.project-gallery-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+}
+
+.project-gallery-counter {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+    font-family: 'Orbitron', monospace;
+}
+
+.project-gallery-dots {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.project-gallery-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border-light);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.project-gallery-dot.active {
+    background: var(--gradient-primary);
+    width: 28px;
+    border-radius: 4px;
+}
+
+/* View More Button */
+.finmate-view-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.7rem 1.5rem;
+    background: linear-gradient(135deg, rgba(13, 71, 161, 0.08), rgba(21, 101, 192, 0.05));
+    border: 1px solid rgba(13, 71, 161, 0.2);
+    border-radius: 25px;
+    color: var(--accent-blue);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(13, 71, 161, 0.1);
+    justify-content: center;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.finmate-view-more-btn:hover {
+    background: var(--gradient-primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(13, 71, 161, 0.3);
+    border-color: transparent;
+}
+
+.finmate-view-more-btn svg {
+    transition: transform 0.3s ease;
+}
+
+.finmate-view-more-btn:hover svg {
+    transform: scale(1.1);
+}
+
+/* NEW: Bottom Section - Full Width Description */
+.featured-bottom-section {
+    padding: 0 3rem 3rem 3rem;
+}
+
+.project-description {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(249, 115, 22, 0.04));
+    padding: 2.5rem;
+    border-radius: 20px;
+    border-left: 5px solid var(--accent-gold);
+    line-height: 1.9;
+    color: var(--text-dark);
+    font-size: 1.05rem;
+    box-shadow: 0 8px 25px rgba(245, 158, 11, 0.1);
+}
+
+.project-description strong {
+    color: var(--accent-blue);
+    font-weight: 800;
+    font-size: 1.1rem;
+}
+
+/* STEM Internship - Compact Card */
+.project-card.simple {
+    background: var(--glass-white);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border-light);
+    border-radius: 25px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px var(--shadow-light);
+    transition: all 0.4s ease;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.project-card.simple:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(13, 71, 161, 0.2);
+    border-color: rgba(13, 71, 161, 0.3);
+}
+
+.simple-header {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.simple-badge {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    box-shadow: 0 4px 15px rgba(13, 71, 161, 0.3);
+}
+
+.simple-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent-blue);
+}
+
+.simple-image {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px var(--shadow-light);
+}
+
+.simple-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.simple-image:hover {
+    transform: scale(1.03);
+    box-shadow: 0 15px 40px rgba(13, 71, 161, 0.2);
+}
+
+.simple-image:hover img {
+    transform: scale(1.1);
+}
+
+.simple-image {
+    position: relative;
+}
+
+.simple-image::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 3rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.simple-image:hover::after {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .featured-top-section {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .featured-gallery-left {
+        position: relative;
+        top: 0;
+    }
+    
+    .featured-content-right {
+        padding-left: 0;
+    }
+    
+    .project-name {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .projects-filter {
+        gap: 1rem;
+    }
+    
+    .filter-btn {
+        padding: 0.7rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .featured-top-section,
+    .featured-bottom-section {
+        padding: 2rem;
+    }
+    
+    .project-name {
+        font-size: 1.8rem;
+    }
+    
+    .project-card.simple {
+        max-width: 100%;
+        padding: 2rem;
+    }
+}
+
+    /* Media query để điều chỉnh khi màn hình nhỏ (mobile hoặc zoom) */
+    @media (max-width: 768px) {
+        .stats-container {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stat-item {
+            width: 100%; /* Full width trên mobile */
+            margin-bottom: 10px;
+        }
+    }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            margin: 4rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--gradient-primary);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(odd) {
+            text-align: right;
+            padding-right: calc(50% + 3rem);
+        }
+
+        .timeline-item:nth-child(even) {
+            text-align: left;
+            padding-left: calc(50% + 3rem);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 25px;
+            left: 50%;
+            width: 24px;
+            height: 24px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            box-shadow: 0 0 0 6px var(--primary-white), 0 0 20px rgba(13, 71, 161, 0.4);
+        }
+
+        .award-badge {
+            display: inline-block;
+            background: var(--gradient-gold);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .timeline-content h3 {
+            color: var(--accent-blue);
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .timeline-content h4 {
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        /* Image Gallery */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+            max-height: 300px;  /* chiều cao để chứa 4 ảnh + 1 phần ảnh tiếp theo */
+    overflow-y: auto;   /* bật cuộn dọc */
+    padding-right: 0.5rem; /* khoảng cách bên phải để không bị che bởi thanh cuộn */
+        }
+
+        .gallery-item {
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, var(--secondary-white), rgba(13, 71, 161, 0.05));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent-blue);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 5px 15px var(--shadow-light);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            border: 1px solid var(--border-light);
+            object-fit: cover;  
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-blue);
+            box-shadow: 0 10px 30px rgba(13, 71, 161, 0.15);
+        }
+
+        /* Contact Section */
+        .contact-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact-card {
+            background: var(--glass-white);
+            padding: 2.5rem;
+            border-radius: 25px;
+            border: 1px solid var(--border-light);
+            text-align: center;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 10px 30px var(--shadow-light);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 20px 50px rgba(13, 71, 161, 0.2);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            fill: var(--accent-blue);
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover .contact-icon {
+            fill: var(--accent-purple);
+            transform: scale(1.1);
+        }
+
+        .contact-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-desc {
+            color: var(--text-gray);
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: var(--primary-white);
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            margin-left: 0px;
+            position: relative;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            font-weight: 900;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .footer-message {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .footer-divider {
+            width: 100px;
+            height: 3px;
+            background: var(--gradient-primary);
+            margin: 2rem auto;
+            border-radius: 2px;
+        }
+
+        .footer-bottom {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                margin-left: 0;
+            }
+
+            .nav-vertical {
+                display: none;
+            }
+
+            .footer {
+                margin-left: 0;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                padding-left: 70px !important;
+                padding-right: 0 !important;
+                text-align: left !important;
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+
+            .chart-container {
+                display: none;
+            }
+
+            .section {
+                padding: 5rem 2rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-white);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-text {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            background: #0D47A1; 
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            transition: background 0.3s ease, transform 0.3s ease;
+            z-index: 999;
+        }
+
+        .scroll-top img {
+            width: 22px;
+            height: 22px;
+            filter: invert(1); 
+        }
+
+        .scroll-top:hover {
+            background: #1565C0;  
+            transform: scale(1.1); 
+        }
+
+        /* Add CSS for active navigation state */
+        .nav-item.active::before {
+            transform: scaleY(1);
+        }
+        .nav-item.active .nav-icon {
+            fill: var(--accent-blue);
+            transform: scale(1.2);
+        }
+        .nav-item.active {
+            background: rgba(13, 71, 161, 0.1);
+            transform: translateX(8px);
+        }
+        .interest-row {
+  display: flex;
+  justify-content: space-between;  /* đẩy 2 nút ra đều 2 bên */
+  gap: 2rem;                       /* khoảng cách giữa 2 nút */
+  margin: 2rem 0;
+  width: 100%;                     /* full chiều ngang của card cha */
+}
+
+.interest-card {
+  flex: 1;                         /* mỗi nút chiếm phần bằng nhau */
+  background: white;
+  border-radius: 20px;
+  padding: 1.2rem;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid var(--border-light, #e0e0e0);
+  color: inherit;
+  transition: all 0.4s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.interest-card p {
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #3b82f6, #9333ea);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Hover + Click giữ nguyên như code trước */
+.interest-card:hover {
+  transform: translateY(-8px);
+  border-color: #3b82f6;
+  box-shadow: 0 20px 50px rgba(59,130,246,0.3);
+}
+
+.interest-card:active {
+  transform: scale(0.96);
+  box-shadow: 0 10px 25px rgba(59,130,246,0.4);
+}
+
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-text">TRAN THE HAI</div>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-grid"></div>
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+    </div>
+
+    <!-- Left Navigation -->
+    <nav class="nav-vertical">
+        <div class="nav-logo"><a href="#home"><img src="hof_2.jpg" alt="Logo" /></a></div>
+        <div class="nav-links">
+            <a href="#about" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+                <span class="nav-text">About me</span>
+            </a>
+            <a href="#awards" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+                <span class="nav-text">Awards</span>
+            </a>
+            <a href="#research" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24">
+                    <path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"/>
+                </svg>
+                <span class="nav-text">Research</span>
+            </a>
+            <a href="#leadership" class="nav-item nav-leadership">
+                <svg class="nav-icon" viewBox="0 0 24 24">
+                    <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63c-.34-1.02-1.28-1.74-2.46-1.74s-2.12.72-2.46 1.74L12.5 16H15v6h5z"/>
+                </svg>
+                <span class="nav-text">Leadership</span>
+            </a>
+            <a href="#socialwork" class="nav-item">
+    <svg class="nav-icon" viewBox="0 0 24 24">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+    </svg>
+    <span class="nav-text">Social Work</span>
+</a>
+            <a href="#projects" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24">
+                    <path d="M21 16V8c0-.55-.45-1-1-1h-1V5c0-.55-.45-1-1-1H6c-.55 0-1 .45-1 1v2H4c-.55 0-1 .45-1 1v8c0 .55.45 1 1 1h1v2c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-2h1c.55 0 1-.45 1-1zm-6 3H9v-2h6v2zm2-12H7V6h10v1z"/>
+                </svg>
+                <span class="nav-text">Projects</span>
+            </a>
+            <a href="#contact" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+                <span class="nav-text">Contact</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title" id="heroTitle">TRAN THE HAI</h1>
+                <p class="hero-tagline">Finance Analytics</p>
+                <p class="hero-description">
+                    Welcome to my portfolio! I’m Tran The Hai, a Grade 11 Math-specialized student at Hanoi - Amsterdam High School for the Gifted. I’m passionate about mathematics, economics, and understanding how data shapes real-world financial systems. Take a look at my journey below!
+                </p>
+                <div class="cta-buttons">
+                    <a href="#about" class="cta-btn cta-primary">View Achievements</a>
+                    <a href="#projects" class="cta-btn cta-secondary">My Portfolio</a>
+                </div>
+            </div>
+
+            <!-- Financial Chart -->
+            <div class="chart-container">
+                <div class="chart-bar"></div>
+                <div class="chart-bar"></div>
+                <div class="chart-bar"></div>
+                <div class="chart-bar"></div>
+                <div class="chart-bar"></div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="asset/about me/about_me.jpg" alt="Professional Portrait" style="z-index: 2;">
+                </div>
+                <div class="glass-card">
+                    <p style="margin-bottom: 2rem; line-height: 1.8; text-align: justify;">
+                        I am a student from Vietnam with a strong academic foundation and a deep interest in finance and economics. I hold a 9.7 GPA, a 1540 SAT score, and an 7.5 IELTS score, reflecting my commitment to both analytical precision and consistent effort.
+                    </p>
+
+                    <div class="stats-container">
+    <div class="stat-item">
+        <div class="stat-number">9.7</div>
+        <div class="stat-label">Average GPA</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-number">1540</div>
+        <div class="stat-label">SAT</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-number">7.5</div>
+        <div class="stat-label">IELTS</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-number">5</div>
+        <div class="stat-label">AP: Macro, Micro, Calculus BC</div>
+    </div>
+</div>
+
+                    <p style="line-height: 1.8; margin-bottom: 1.5rem; text-align: justify;">
+                        Growing up in my parents’ tailor shop, I learned early how money flows through every decision-how one mistake in recording payments can delay an order, and how one thoughtful adjustment can retain a customer. Those experiences taught me that finance is not just numbers but a language of trust and opportunity.
+                    </p>
+            
+                    <p style="line-height: 1.8; text-align: justify;">
+    Over time, that curiosity developed into action. I led research projects, including one presented at the <highlight>WICO-Korea</highlight>, analyzing factors influencing FDI attraction into Vietnam's manufacturing and processing industry. Beyond research, I have been deepening my understanding of <highlight>financial systems and corporate decision-making</highlight>, exploring how businesses manage risks and allocate resources efficiently in changing markets.<br><br>
+I plan to major in <highlight>Finance or Risk Management</highlight>, aiming to build data-informed solutions that make financial decisions more transparent and accessible. My goal is to use what I learn to create systems where money not only circulates efficiently but also enables growth for others.
+</p>
+
+<!-- Thêm 2 nút Baseball và Interest -->
+<div class="interest-row">
+    <a href="https://eduportfolio.github.io/TheHaiSport/" 
+   class="interest-card" 
+   target="_blank" 
+   rel="noopener noreferrer">
+    <p>My Baseball Journey</p>
+</a>
+
+</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Awards Section -->
+        <section id="awards" class="section">
+            <h2 class="section-title">Honors & Awards</h2>
+            <p>
+                Over the past years, I have had the opportunity to participate in several national and international competitions, exploring topics at the intersection of economics, environmental policy, artificial intelligence, and applied chemistry.
+            </p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="glass-card">
+                        <div class="award-badge">Zlato Gold (Gold Medal)</div>
+                        <h3>INOVA 2025</h3>
+                        <h4>“49th International Invention Show” competition</h4>
+                        <p>Exchange rate risk for Vietnamese import-export enterprises - Current situation and solutions</p>
+                        <a href="https://inova-croatia.com/en/product-detail/exchange-rate-risk-for-vietnamese-import-export-enterprises-current-situation-and-solutions/" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; color: #1565C0; text-decoration: none; font-weight: 600; font-size: 1rem; margin-top: 1rem; margin-bottom: 0.5rem; transition: all 0.3s ease;" onmouseover="this.style.color='#0D47A1'; this.style.gap='12px'" onmouseout="this.style.color='#1565C0'; this.style.gap='8px'">
+                            View Award Details on INOVA Website
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="transition: transform 0.3s ease;">
+                                <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+                            </svg>
+                        </a>
+                        <div class="image-gallery">
+                            <div class="gallery-item"><img src="innova.png" alt="INOVA 2025 Gold Medal"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="glass-card">
+                        <div class="award-badge">Grand Award & Gold Medal</div>
+<h3>WICO 2025</h3>
+<h4>"World Invention Creativity Olympic & Conference” competition</h4>
+<p>
+    FDI Attraction Policies in Vietnam's Processing Industry
+</p>
+                        <div class="image-gallery">
+                            <div class="gallery-item"><img src="asset/honor_award/wico_1.jpg" alt="Research Data"></div>
+                            <div class="gallery-item"><img src="asset/honor_award/wico_2.jpg" alt="Research Data"></div>
+                            <div class="gallery-item"><img src="asset/honor_award/wico_3.jpg" alt="Research Data"></div>
+                            <div class="gallery-item"><img src="asset/honor_award/wico_4.jpg" alt="Research Data"></div>
+                            <div class="gallery-item"><img src="asset/honor_award/wico_5.jpg" alt="Research Data"></div>
+                            <div class="gallery-item"><img src="asset/honor_award/wico_6.jpg" alt="Research Data"></div>
+                            <div class="gallery-item"><img src="asset/honor_award/wico_7.jpg" alt="Research Data"></div>
+                            <div class="gallery-item"><img src="asset/honor_award/wico_8.jpg" alt="Research Data"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="glass-card">
+                        <div class="award-badge">Gold Medal</div>
+                        <h3>1I1W 2025</h3>
+                        <h4>1 Idea 1 World 2025” competition</h4>
+                        <p>Impact of Carbon Tax on the Economy and Industrial Sectors</p>
+                        <div class="image-gallery">
+                            <div class="gallery-item"><img src="asset/honor_award/1i1w.jpg" alt="Research Data"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="glass-card">
+                        <div class="award-badge">Gold Medal</div>
+                        <h3>AIGC 2025</h3>
+                        <h4>“Advanced Innovation Global Competition 2025” competition</h4>
+                        <p>The Impact of Media Crises on Customer Loyalty</p>
+                        <div class="image-gallery">
+                            <div class="gallery-item"><img src="asset/honor_award/aigc_1.jpg" alt="Research Data"></div>
+                            <div class="gallery-item"><img src="asset/honor_award/aigc_2.jpg" alt="Research Data"></div>
+                            <div class="gallery-item"><img src="asset/honor_award/aigc_3.jpg" alt="Research Data"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="glass-card">
+                        <div class="award-badge">Gold Medal / 1st runner-up</div>
+                        <h3>GJMOC 2023</h3>
+                        <h4>Global Junior Math Online competition</h4>
+                        <div class="image-gallery">
+                            <div class="gallery-item"><img src="asset/honor_award/gjmoc_1.jpg" alt="Research Data"></div>
+                            <div class="gallery-item"><img src="asset/honor_award/gjmoc_2.jpg" alt="Research Data"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="glass-card">
+                        <div class="award-badge">Silver Medal</div>
+                        <h3>I3O Competition 2024</h3>
+                        <h4>Indonesia International IoT Olympiad 2024</h4>
+                        <p>Waste Classification Using AI</p>
+                        <div class="image-gallery">
+                            <div class="gallery-item"><img src="asset/honor_award/i3o_2.jpg" alt="Research Data"></div>
+                            <div class="gallery-item"><img src="asset/honor_award/i3o_3.jpg" alt="Research Data"></div>
+                            <div class="gallery-item"><img src="asset/honor_award/i3o_1.jpg" alt="Research Data"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="glass-card">
+                        <div class="award-badge">Gold Medal</div>
+                        <h3>IPITEx 2024</h3>
+                        <h4>2024 Bangkok International Intellectual Property, Invention, Innovation and Technology Exposition</h4>
+                        <p>Detection of Low Concentrations of Al³⁺ Ions</p>
+                        <div class="image-gallery">
+                            <div class="gallery-item"><img src="asset/honor_award/ipitex_1.jpg" alt="Research Data"></div>
+                            <div class="gallery-item"><img src="asset/honor_award/ipitex_2.jpg" alt="Research Data"></div>
+                            <div class="gallery-item"><img src="asset/honor_award/ipitex_3.jpg" alt="Research Data"></div>
+                            <div class="gallery-item"><img src="asset/honor_award/ipitex_4.jpg" alt="Research Data"></div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- Research Section -->
+        <section id="research" class="section">
+            <h2 class="section-title">Research Experience</h2>
+            <div class="timeline">
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="glass-card">
+                        <div class="award-badge">2025</div>
+                        <h3>Co-Author</h3>
+                        <h4>Applications of Artificial Intelligence (AI) in the Logistics Industry in Vietnam: Opportunities and Challenges</h4>
+                        <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                            Conducted research on applying artificial intelligence (AI) technologies to Vietnam’s logistics industry, analyzing their role in optimizing supply-chain operations, transportation management, and warehouse efficiency. Collected 50+ logistics datasets & wrote insights on Vietnam‘s $707B AI market. The project examined both opportunities and challenges of AI adoption, emphasizing digital transformation, data-driven decision-making, and sustainable industry growth.
+                        </p>
+                        <a href="https://www.researchgate.net/publication/391833979_Applications_of_Artificial_Intelligence_AI_In_the_Logistics_Industry_in_Vietnam_Opportunities_and_Challenges" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; color: #1565C0; text-decoration: none; font-weight: 600; font-size: 1rem; margin-bottom: 0.5rem; transition: all 0.3s ease;" onmouseover="this.style.color='#0D47A1'; this.style.gap='12px'" onmouseout="this.style.color='#1565C0'; this.style.gap='8px'">
+                            View Research Paper on ResearchGate
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="transition: transform 0.3s ease;">
+                                <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+                            </svg>
+                        </a>
+                        <div class="image-gallery">
+                            <div class="gallery-item"><img src="piv1.png" alt="AI Applications in Vietnamese Logistics"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="glass-card">
+                        <div class="award-badge">2025</div>
+                        <h3>Fluorescent Sensor for Al³⁺ Ion Detection</h3>
+                        <h4>Using Eu³⁺ Complexes</h4>
+                        <p>
+                            Research calculation assistance
+                        </p>
+                        <div class="image-gallery">
+                            <div class="gallery-item"><img src="asset/research/biology.jpg" alt="Research"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Leadership Section -->
+        <section id="leadership" class="section">
+            <h2 class="section-title">Leadership</h2>
+            <div class="timeline">
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="glass-card">
+                        <div class="award-badge">2024-Present</div>
+                        <h3>Head of Finance Committee</h3>
+                        <h4>OlympiAms Club, AMS</h4>
+                        <p>Lead a department of 6 people. Raised 15 million Vietnam dong for the main events. Managed & budgeted a club of 60 people</p>
+                        <div class="image-gallery">
+                            <div class="gallery-item"><img src="asset/leadership/hof_1.jpg" alt="Research Data"></div>
+                            <div class="gallery-item"><img src="asset/leadership/hof_2.jpg" alt="Research Data"></div>
+                            <div class="gallery-item"><img src="asset/leadership/hof_3.jpg" alt="Research Data"></div>
+                            <div class="gallery-item"><img src="asset/leadership/hof_4.jpg" alt="Research Data"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="glass-card">
+                        <div class="award-badge">2024-2025</div>
+                        <h3>President</h3>
+                        <h4>Hanoi Amsterdam Phoenix (Baseball Club)</h4>
+                        <p>Lead a team of 20 players in two tournaments. Won the 3rd place in Rising Stars Tournaments and reached the final in the Hanoi Super Base tournament. Operated a club of 40+ players. Run a Facebook fan page of 7k+ followers</p>
+                        <div class="image-gallery">
+                            <div class="gallery-item"><img src="asset/leadership/captian_1.jpg" alt="Research Data"></div>
+                            <div class="gallery-item"><img src="asset/leadership/captian_2.jpg" alt="Research Data"></div>
+                            <div class="gallery-item"><img src="asset/leadership/captian_3.jpg" alt="Research Data"></div>
+                            <div class="gallery-item"><img src="asset/leadership/captian_4.jpg" alt="Research Data"></div>
+                            <div class="gallery-item"><img src="asset/leadership/captian_5.jpg" alt="Research Data"></div>
+                            <div class="gallery-item"><img src="asset/leadership/captian_6.jpg" alt="Research Data"></div>
+                            <div class="gallery-item"><img src="asset/leadership/captian_7.jpg" alt="Research Data"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        <!-- Social Work Section -->
+<section id="socialwork" class="section">
+    <h2 class="section-title">Social Work & Activities</h2>
+    
+    <div class="social-grid">
+        <!-- Cultural Ambassador -->
+        <div class="social-card">
+            <div class="social-header">
+                <div class="social-title-wrap">
+                    <div class="social-title">Cultural Ambassador</div>
+                    <div class="social-subtitle">Thang Long Imperial Citadel</div>
+                </div>
+            </div>
+            <div class="social-content">
+                <ul>
+                    <li>Participated in the preservation and promotion process of the Vietnamese Cultural Heritage through studying and revisiting the cultural sites & organizing outreach initiatives</li>
+                </ul>
+                <div class="social-images">
+                    <div class="social-img-item"><img src="asset/social/thanglong_2025.jpg" alt="Thang Long 2025"></div>
+                    <div class="social-img-item"><img src="asset/social/thanglong_2024.jpg" alt="Thang Long 2024"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SOS Children's Village -->
+        <div class="social-card">
+            <div class="social-header">
+                <div class="social-title-wrap">
+                    <div class="social-title">Volunteer</div>
+                    <div class="social-subtitle">SOS Children's Village - Little Sunshine</div>
+                </div>
+            </div>
+            <div class="social-content">
+                <ul>
+                    <li>Participated in a volunteer project organized with classmates, engaging in meaningful interactions with 40+ parentless (biological) children, and gave supplies worth 10 million VND to the village</li>
+                    <li>Revisited the children before starting the New Academic Year. Organized lunches for 8 families. Taught children chess and painting</li>
+                    <li>Held traditional & folk games for 40+ children</li>
+                </ul>
+                <div class="social-images">
+                    <div class="social-img-item"><img src="asset/social/sos_1.jpg" alt="SOS 1"></div>
+                    <div class="social-img-item"><img src="asset/social/sos_2.jpg" alt="SOS 2"></div>
+                    <div class="social-img-item"><img src="asset/social/sos_3.jpg" alt="SOS 3"></div>
+                    <div class="social-img-item"><img src="asset/social/sos_4.jpg" alt="SOS 4"></div>
+                    <div class="social-img-item"><img src="asset/social/sos_5.jpg" alt="SOS 5"></div>
+                    <div class="social-img-item"><img src="asset/social/sos_6.jpg" alt="SOS 6"></div>
+                    <div class="social-img-item"><img src="asset/social/sos_7.jpg" alt="SOS 7"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teaching at National Institute -->
+        <div class="social-card">
+            <div class="social-header">
+                <div class="social-title-wrap">
+                    <div class="social-title">Teaching Students</div>
+                    <div class="social-subtitle">National Institute of Hematology and Blood Transfusion</div>
+                </div>
+            </div>
+            <div class="social-content">
+                <ul>
+                    <li>Spend 3+ hours every Saturday teaching maths for 20+ children with blood cancer</li>
+                </ul>
+                <div class="social-images">
+                    <div class="social-img-item"><img src="asset/TS/1.jpg" alt="SOS 1"></div>
+                    <div class="social-img-item"><img src="asset/TS/2.jpg" alt="SOS 2"></div>
+                    <div class="social-img-item"><img src="asset/TS/3.jpg" alt="SOS 3"></div>
+                    <div class="social-img-item"><img src="asset/TS/4,5.jpg" alt="SOS 4"></div>
+                    <div class="social-img-item"><img src="asset/TS/5.jpg" alt="SOS 5"></div>
+                    <div class="social-img-item"><img src="asset/TS/6.jpg" alt="SOS 6"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Che Tao Volunteer Campaign -->
+        <div class="social-card">
+            <div class="social-header">
+                <div class="social-title-wrap">
+                    <div class="social-title">2025 Volunteer Campaign</div>
+                    <div class="social-subtitle">Che Tao Commune, Lao Cai</div>
+                </div>
+            </div>
+            <div class="social-content">
+                <ul>
+                    <li>Participated in outreach activities supporting ethnic minority communities</li>
+                    <li>Distributed medicine and care packages to 50+ local residents</li>
+                    <li>Conducted home visits to check on health conditions and offer support</li>
+                </ul>
+                <div class="social-images">
+                    <div class="social-img-item"><img src="asset/social/laocai_1.jpg" alt="Lao Cai 1"></div>
+                    <div class="social-img-item"><img src="asset/social/laocai_2.jpg" alt="Lao Cai 2"></div>
+                    <div class="social-img-item"><img src="asset/social/laocai_3.jpg" alt="Lao Cai 3"></div>
+                    <div class="social-img-item"><img src="asset/social/laocai_4.jpg" alt="Lao Cai 4"></div>
+                    <div class="social-img-item"><img src="asset/social/laocai_5.jpg" alt="Lao Cai 5"></div>
+                    <div class="social-img-item"><img src="asset/social/laocai_6.jpg" alt="Lao Cai 6"></div>
+                    <div class="social-img-item"><img src="asset/social/laocai_7.jpg" alt="Lao Cai 7"></div>
+                    <div class="social-img-item"><img src="asset/social/laocai_8.jpg" alt="Lao Cai 8"></div>
+                    <div class="social-img-item"><img src="asset/social/laocai_9.jpg" alt="Lao Cai 9"></div>
+                    <div class="social-img-item"><img src="asset/social/laocai_10.jpg" alt="Lao Cai 10"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Red Cross Certificate -->
+        <div class="social-card">
+            <div class="social-header">
+                <div class="social-title-wrap">
+                    <div class="social-title">Certificate of Humanitarian Contribution</div>
+                    <div class="social-subtitle">Red Cross Society of Huong Khe District, Ha Tinh</div>
+                </div>
+            </div>
+            <div class="social-content">
+                <ul>
+                    <li>Recognized for contributing to the "Loving Kitchen" charity program supporting 70+ disadvantaged families in Huong Khe District</li>
+                    <li>Demonstrated empathy and commitment to community welfare through consistent volunteer participation</li>
+                    <li>Collaborated with Thien Tam Group to provide aid and meals to 70+ underprivileged households</li>
+                </ul>
+                <div class="social-images">
+                    <div class="social-img-item"><img src="hm1.jpg" alt="Red Cross 1"></div>
+                    <div class="social-img-item"><img src="hm2.jpg" alt="Red Cross 2"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certificate of Merit - Yen Bai -->
+        <div class="social-card">
+            <div class="social-header">
+                <div class="social-title-wrap">
+                    <div class="social-title">Certificate of Merit</div>
+                    <div class="social-subtitle">People's Committee of Tram Tau District, Yen Bai</div>
+                </div>
+            </div>
+            <div class="social-content">
+                <ul>
+                    <li>Awarded for contributions to relief efforts for 100+ residents affected by Storm No. 3 (Yagi) in Ban Mu Commune, Yen Bai Province</li>
+                    <li>Engaged in nationwide humanitarian activities aimed at disaster recovery and community resilience</li>
+                    <li>Recognized by local authorities for exemplary volunteer spirit and social responsibility</li>
+                </ul>
+                <div class="social-images">
+                    <div class="social-img-item"><img src="asset/social/yagi_1.jpg" alt="Yagi Relief 1"></div>
+                    <div class="social-img-item"><img src="asset/social/yagi_2.jpg" alt="Yagi Relief 2"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hanoi Food Rescue - Hunger Games -->
+        <div class="social-card">
+            <div class="social-header">
+                <div class="social-title-wrap">
+                    <div class="social-title">HR Department Member</div>
+                    <div class="social-subtitle">Hanoi Food Rescue - "The Hunger Games" Event</div>
+                </div>
+            </div>
+            <div class="social-content">
+                <ul>
+                    <li>Co-organized a fundraising event inspired by The Hunger Games to promote food donation and waste reduction in Hanoi</li>
+                    <li>Worked with over 50 volunteers to coordinate logistics, manage participants, and ensure a safe and engaging experience</li>
+                    <li>Contributed to raising funds and increasing community awareness of sustainable food practices</li>
+                </ul>
+                <div class="social-images">
+                    <div class="social-img-item"><img src="asset/leadership/hr_1.jpg" alt="HR 1"></div>
+                    <div class="social-img-item"><img src="asset/leadership/hr_2.jpg" alt="HR 2"></div>
+                    <div class="social-img-item"><img src="asset/leadership/hr_3.jpg" alt="HR 3"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hanoi Food Rescue - Tet Campaign -->
+        <div class="social-card">
+            <div class="social-header">
+                <div class="social-title-wrap">
+                    <div class="social-title">HR Department Member</div>
+                    <div class="social-subtitle">Hanoi Food Rescue - Tet Donation Campaign</div>
+                </div>
+            </div>
+            <div class="social-content">
+                <ul>
+                    <li>Participated in a school-wide charity drive to support underprivileged families during the Lunar New Year</li>
+                    <li>Collected and delivered essential goods and donations to local communities in need</li>
+                    <li>Encouraged student participation through social media outreach and classroom campaigns</li>
+                </ul>
+                <div class="social-images">
+                    <div class="social-img-item"><img src="rc1.jpg" alt="Tet Campaign 1"></div>
+                    <div class="social-img-item"><img src="rc2.jpg" alt="Tet Campaign 2"></div>
+                    <div class="social-img-item"><img src="rc.jpg" alt="Tet Campaign 3"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AMS Orientation Day -->
+        <div class="social-card">
+            <div class="social-header">
+                <div class="social-title-wrap">
+                    <div class="social-title">Orientation Day</div>
+                    <div class="social-subtitle">Hanoi-Amsterdam High School for the Gifted</div>
+                </div>
+            </div>
+            <div class="social-content">
+                <ul>
+                    <li>Assisted in organizing activities and welcoming new students to the Nguyen Sieu community</li>
+                    <li>Guided freshmen around the campus and provided information about academic and extracurricular opportunities</li>
+                    <li>Helped create a friendly and inclusive atmosphere for over 200 participants</li>
+                </ul>
+                <div class="social-images">
+                    <div class="social-img-item"><img src="od.jpg" alt="Orientation Day 1"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+        <!-- Personal Projects Section -->
+<section id="projects" class="section">
+    <h2 class="section-title">Personal Projects</h2>
+    
+    <!-- Filter Buttons -->
+    <div class="projects-filter">
+        <button class="filter-btn active" data-filter="all">
+            <span>All Projects</span>
+        </button>
+        <button class="filter-btn" data-filter="personal">
+            <span>Personal Projects</span>
+        </button>
+        <button class="filter-btn" data-filter="internship">
+            <span>Internships</span>
+        </button>
+    </div>
+    
+    <div class="projects-container">
+        <!-- FinMate Featured Project -->
+        <div class="project-item show" data-category="personal">
+            <div class="project-card featured">
+                <!-- Top Section: Gallery Left, Content Right -->
+                <div class="featured-top-section">
+                    <!-- Left: Gallery -->
+                    <div class="featured-gallery-left">
+                        <div class="project-gallery-compact">
+                            <div class="project-gallery-wrapper">
+                                <div class="project-gallery-track" id="finmateGalleryTrack">
+                                    <div class="project-gallery-slide"><img src="Sản Phẩm cá nhân/sp1.jpg" alt="FinMate Dashboard"></div>
+                                    <div class="project-gallery-slide"><img src="Sản Phẩm cá nhân/sp2.jpg" alt="Portfolio Analytics"></div>
+                                    <div class="project-gallery-slide"><img src="Sản Phẩm cá nhân/sp3.jpg" alt="Asset Allocation"></div>
+                                    <div class="project-gallery-slide"><img src="Sản Phẩm cá nhân/sp4.jpg" alt="Market Data"></div>
+                                    <div class="project-gallery-slide"><img src="Sản Phẩm cá nhân/sp5.jpg" alt="Performance Metrics"></div>
+                                    <div class="project-gallery-slide"><img src="Sản Phẩm cá nhân/sp6.jpg" alt="Investment Alerts"></div>
+                                    <div class="project-gallery-slide"><img src="Sản Phẩm cá nhân/sp7.jpg" alt="Risk Analysis"></div>
+                                </div>
+                            </div>
+                            
+                            <button class="project-gallery-btn prev" onclick="moveFinmateSlide(-1)">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                            </button>
+                            <button class="project-gallery-btn next" onclick="moveFinmateSlide(1)">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </button>
+
+                            <div class="project-gallery-nav">
+    <div class="project-gallery-counter">
+        <span id="finmateCurrentSlide">1</span> / 7
+    </div>
+    <div class="project-gallery-dots" id="finmateGalleryDots"></div>
+    <div style="font-size: 0.85rem; color: var(--text-gray); margin-top: 0.5rem;">
+        Arrow keys to navigate
+    </div>
+</div>
+                        </div>
+                        
+                            <!-- View More Button -->
+<a href="https://drive.google.com/drive/folders/1mxSVrVy872lgrdmHvUVVGk2eTBjQiQOx" target="_blank" class="finmate-view-more-btn">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+    </svg>
+    View More Screenshots
+</a>
+
+                    </div>
+
+                    
+
+                    <!-- Right: Content -->
+                    <div class="featured-content-right">
+                        <div class="project-badge">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            2025
+                        </div>
+                        <h3 class="project-name">FinMate</h3>
+                        <p class="project-tagline">Your friendly finance companion</p>
+                        
+                        <div class="project-highlights">
+                            <h4>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                Key Achievements
+                            </h4>
+                            <ul>
+                                <li><strong>Developed FinMate Investment Application</strong> - Designed and implemented a web-based platform for real-time portfolio tracking, asset allocation visualization, and performance analytics.</li>
+                                <li><strong>Integrated financial data APIs</strong> - Connected live market data (Yahoo Finance, Finnhub) to automate stock updates, macroeconomic indicators, and investment alerts.</li>
+                                <li><strong>Delivered data-driven financial insights</strong> - Designed analytics dashboards that visualize portfolio returns, asset allocation, and risk metrics to support informed investment decisions.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Section: Full Width Description -->
+                <div class="featured-bottom-section">
+                    <div class="project-description">
+                        <strong>Project Overview:</strong> Developed FinMate, an interactive investment management dashboard that enables users to monitor portfolio performance, analyze real-time financial data, and receive automated investment insights. The system integrates APIs from Yahoo Finance and Finnhub, combines data visualization with modern UI/UX design, and supports investors in optimizing risk and return through smart, data-driven decisions.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEM Internship - Simple Card -->
+<div class="project-item show" data-category="internship">
+    <div class="project-card simple">
+        <div class="simple-header">
+            <div class="simple-badge">2024</div>
+            <h3 class="simple-title">STEM Internship</h3>
+        </div>
+        <div class="simple-image" onclick="openSimpleLightbox(this)">
+            <img src="asset/personal_prj/stem_intern.jpg" alt="STEM Internship">
+        </div>
+    </div>
+</div>
+    </div>
+</section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-links">
+                <a href="https://www.facebook.com/TheHai.Tr?rdid=d4DKqmtn70BWK7zz&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1HJ7VzB84T%2F#" 
+   class="contact-card" 
+   target="_blank" 
+   rel="noopener noreferrer">
+    <svg class="contact-icon" viewBox="0 0 24 24">
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+    </svg>
+    <div class="contact-title">Facebook</div>
+</a>
+
+<a href="mailto:thehai294@gmail.com" 
+   class="contact-card" 
+   target="_blank" 
+   rel="noopener noreferrer">
+    <svg class="contact-icon" viewBox="0 0 24 24">
+        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+    </svg>
+    <div class="contact-title">Email</div>
+</a>
+
+<a href="https://docs.google.com/document/d/10AWmwW_T7S8J7olUxl0G9EcR1oautRw2qNDrtKepqKM/edit?tab=t.0" 
+   class="contact-card" 
+   target="_blank" 
+   rel="noopener noreferrer" 
+   download>
+    <svg class="contact-icon" viewBox="0 0 24 24">
+        <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+    </svg>
+    <div class="contact-title">Download CV</div>
+</a>
+
+            </div>
+        </section>
+    </main>
+
+    <button id="scrollTopBtn" class="scroll-top">
+        <img src="./asset/arrowup.svg" alt="Scroll to top">
+    </button>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">TRAN THE HAI</div>
+            <div class="footer-message">
+                Thank you for visiting my portfolio. Let's connect and create something amazing together.
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                © 2025 Tran The Hai. Crafted with passion for finance and innovation.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Loading Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const ls = document.getElementById('loadingScreen');
+                ls.style.opacity = '0';
+                setTimeout(() => {
+                    ls.style.display = 'none';
+                    document.body.classList.add('play-title');
+                }, 500);
+            }, 1800);
+        });
+
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const trails = [];
+        let mouseX = 0, mouseY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
+            
+            // Create trail
+            if (Math.random() > 0.85) {
+                createTrail(mouseX, mouseY);
+            }
+        });
+
+        function createTrail(x, y) {
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            trail.style.left = x + 'px';
+            trail.style.top = y + 'px';
+            document.body.appendChild(trail);
+            
+            setTimeout(() => {
+                trail.remove();
+            }, 1200);
+        }
+
+        // Cursor hover effects
+        const interactables = document.querySelectorAll('a, button, .gallery-item, .nav-item');
+        interactables.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(1.8)';
+                cursor.style.background = 'linear-gradient(45deg, var(--accent-gold), var(--accent-purple))';
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursor.style.background = 'var(--gradient-primary)';
+            });
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            observer.observe(item);
+        });
+
+        // Gallery modal with Navigation
+let currentGalleryItems = [];
+let currentGalleryIndex = 0;
+
+function openGalleryModal(items, startIndex) {
+    currentGalleryItems = items;
+    currentGalleryIndex = startIndex;
+    
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.id = 'galleryModal';
+    modal.style.cssText = `
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background:rgba(255,255,255,0.95);
+        backdrop-filter:blur(20px);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        z-index:10000;
+        opacity:0;
+        transition:opacity 0.3s ease;
+        cursor: default;`;
+
+    const modalContent = document.createElement('div');
+    modalContent.id = 'galleryModalContent';
+    modalContent.style.cssText = `
+        background: var(--glass-white);
+        border: 1px solid var(--border-light);
+        padding: 3rem;
+        border-radius: 25px;
+        text-align: center;
+        max-width: 800px;
+        width: 90%;
+        margin: 2rem;
+        transform: scale(0.8);
+        transition: transform 0.3s ease;
+        backdrop-filter: blur(20px);
+        box-shadow: 0 20px 60px var(--shadow-light);
+        position: relative;`;
+
+    updateGalleryModalContent(modalContent);
+
+    // Navigation Buttons
+    if (currentGalleryItems.length > 1) {
+        const prevBtn = document.createElement('button');
+        prevBtn.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+            </svg>`;
+        prevBtn.style.cssText = `
+            position: absolute;
+            left: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            background: var(--gradient-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(13, 71, 161, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;`;
+        
+        prevBtn.addEventListener('mouseenter', () => {
+            prevBtn.style.transform = 'translateY(-50%) scale(1.1)';
+            prevBtn.style.boxShadow = '0 15px 40px rgba(13, 71, 161, 0.5)';
+        });
+        prevBtn.addEventListener('mouseleave', () => {
+            prevBtn.style.transform = 'translateY(-50%) scale(1)';
+            prevBtn.style.boxShadow = '0 10px 30px rgba(13, 71, 161, 0.3)';
+        });
+        prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navigateGallery(-1);
+        });
+
+        const nextBtn = document.createElement('button');
+        nextBtn.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+            </svg>`;
+        nextBtn.style.cssText = prevBtn.style.cssText.replace('left: -60px', 'right: -60px');
+        
+        nextBtn.addEventListener('mouseenter', () => {
+            nextBtn.style.transform = 'translateY(-50%) scale(1.1)';
+            nextBtn.style.boxShadow = '0 15px 40px rgba(13, 71, 161, 0.5)';
+        });
+        nextBtn.addEventListener('mouseleave', () => {
+            nextBtn.style.transform = 'translateY(-50%) scale(1)';
+            nextBtn.style.boxShadow = '0 10px 30px rgba(13, 71, 161, 0.3)';
+        });
+        nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navigateGallery(1);
+        });
+
+        modalContent.appendChild(prevBtn);
+        modalContent.appendChild(nextBtn);
+    }
+
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+
+    setTimeout(() => {
+        modal.style.opacity = '1';
+        modalContent.style.transform = 'scale(1)';
+    }, 10);
+
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.remove();
+        }
+    });
+
+    // Keyboard navigation
+    const keyHandler = function(e) {
+        if (e.key === 'Escape') {
+            modal.remove();
+            document.removeEventListener('keydown', keyHandler);
+        } else if (e.key === 'ArrowLeft') {
+            navigateGallery(-1);
+        } else if (e.key === 'ArrowRight') {
+            navigateGallery(1);
+        }
+    };
+    document.addEventListener('keydown', keyHandler);
+}
+
+function navigateGallery(direction) {
+    currentGalleryIndex += direction;
+    if (currentGalleryIndex < 0) currentGalleryIndex = currentGalleryItems.length - 1;
+    if (currentGalleryIndex >= currentGalleryItems.length) currentGalleryIndex = 0;
+    
+    const modalContent = document.getElementById('galleryModalContent');
+    if (modalContent) {
+        updateGalleryModalContent(modalContent);
+    }
+}
+
+function updateGalleryModalContent(modalContent) {
+    const item = currentGalleryItems[currentGalleryIndex];
+    const img = item.querySelector("img");
+    
+    // Remove old content but keep navigation buttons
+    const existingContent = modalContent.querySelector('.modal-inner-content');
+    if (existingContent) {
+        existingContent.remove();
+    }
+    
+    const innerContent = document.createElement('div');
+    innerContent.className = 'modal-inner-content';
+    
+    if (img) {
+        innerContent.innerHTML = `
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem; font-family: 'Orbitron', monospace; font-weight: 700;">${item.textContent}</h3>
+            <img src="${img.src}" alt="${img.alt}" 
+            style="max-width: 100%; max-height: 60vh; border-radius: 15px; margin-bottom: 1rem; display: block;">
+            <div style="color: var(--text-gray); margin-bottom: 1rem; font-weight: 600;">Image ${currentGalleryIndex + 1} of ${currentGalleryItems.length}</div>
+            <button class="close-modal-btn" style="background: var(--gradient-primary); color: white; border: none; padding: 1rem 2rem; border-radius: 25px; cursor: pointer; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(13, 71, 161, 0.3);">Close</button>`;
+    } else {
+        innerContent.innerHTML = `
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem; font-family: 'Orbitron', monospace; font-weight: 700;">${item.textContent}</h3>
+            <div style="width: 100%; height: 200px; background: linear-gradient(45deg, #E3F2FD, #BBDEFB); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; color: var(--accent-blue); font-weight: bold;">Content Placeholder</div>
+            <p style="color: #666; line-height: 1.6;">This item represents ${item.textContent.toLowerCase()}.</p>
+            <div style="color: var(--text-gray); margin-bottom: 1rem; font-weight: 600;">Item ${currentGalleryIndex + 1} of ${currentGalleryItems.length}</div>
+            <button class="close-modal-btn" style="background: var(--gradient-primary); color: white; border: none; padding: 1rem 2rem; border-radius: 25px; cursor: pointer; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(13, 71, 161, 0.3);">Close</button>`;
+    }
+    
+    // Insert at the beginning (before nav buttons)
+    modalContent.insertBefore(innerContent, modalContent.firstChild);
+    
+    // Add close button handler
+    const closeBtn = innerContent.querySelector('.close-modal-btn');
+    closeBtn.addEventListener('click', () => {
+        document.getElementById('galleryModal').remove();
+    });
+}
+
+// Initialize gallery items click handlers
+document.querySelectorAll('.gallery-item').forEach((item, index, items) => {
+    item.addEventListener('click', function() {
+        openGalleryModal(Array.from(items), index);
+    });
+});
+
+        // Social Work Image Lightbox with Navigation
+let currentSocialImages = [];
+let currentSocialIndex = 0;
+
+function openSocialLightbox(images, startIndex) {
+    currentSocialImages = images;
+    currentSocialIndex = startIndex;
+    
+    const modal = document.createElement('div');
+    modal.className = 'lightbox-modal';
+    modal.id = 'socialLightbox';
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        backdrop-filter: blur(10px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10001;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        cursor: zoom-out;
+    `;
+    
+    const imgContainer = document.createElement('div');
+imgContainer.id = 'socialImgContainer';
+imgContainer.style.cssText = `
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+`;
+    
+    updateSocialLightboxContent(imgContainer);
+    
+    // Close button
+    const closeBtn = document.createElement('button');
+    closeBtn.innerHTML = '×';
+    closeBtn.style.cssText = `
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        background: white;
+        border: none;
+        font-size: 40px;
+        color: #333;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        z-index: 10002;
+    `;
+    
+    closeBtn.addEventListener('mouseenter', () => {
+        closeBtn.style.transform = 'rotate(90deg) scale(1.1)';
+        closeBtn.style.background = '#f44336';
+        closeBtn.style.color = 'white';
+    });
+    
+    closeBtn.addEventListener('mouseleave', () => {
+        closeBtn.style.transform = 'rotate(0deg) scale(1)';
+        closeBtn.style.background = 'white';
+        closeBtn.style.color = '#333';
+    });
+    
+    // Navigation buttons
+    if (currentSocialImages.length > 1) {
+        const prevBtn = document.createElement('button');
+        prevBtn.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="white">
+                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+            </svg>`;
+        prevBtn.style.cssText = `
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.9);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            z-index: 10002;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        `;
+        
+        prevBtn.addEventListener('mouseenter', () => {
+            prevBtn.style.transform = 'translateY(-50%) scale(1.15)';
+            prevBtn.style.background = 'var(--accent-blue)';
+        });
+        prevBtn.addEventListener('mouseleave', () => {
+            prevBtn.style.transform = 'translateY(-50%) scale(1)';
+            prevBtn.style.background = 'rgba(255, 255, 255, 0.9)';
+        });
+        prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navigateSocialLightbox(-1);
+        });
+
+        const nextBtn = document.createElement('button');
+        nextBtn.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="white">
+                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+            </svg>`;
+        nextBtn.style.cssText = prevBtn.style.cssText.replace('left: 20px', 'right: 20px');
+        
+        nextBtn.addEventListener('mouseenter', () => {
+            nextBtn.style.transform = 'translateY(-50%) scale(1.15)';
+            nextBtn.style.background = 'var(--accent-blue)';
+        });
+        nextBtn.addEventListener('mouseleave', () => {
+            nextBtn.style.transform = 'translateY(-50%) scale(1)';
+            nextBtn.style.background = 'rgba(255, 255, 255, 0.9)';
+        });
+        nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navigateSocialLightbox(1);
+        });
+
+        modal.appendChild(prevBtn);
+        modal.appendChild(nextBtn);
+    }
+    
+    // Image counter
+    const counter = document.createElement('div');
+    counter.id = 'socialCounter';
+    counter.style.cssText = `
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(255, 255, 255, 0.9);
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-weight: 700;
+        color: var(--accent-blue);
+        font-family: 'Orbitron', monospace;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        z-index: 10002;
+    `;
+    counter.textContent = `${currentSocialIndex + 1} / ${currentSocialImages.length}`;
+    
+    modal.appendChild(imgContainer);
+    modal.appendChild(closeBtn);
+    modal.appendChild(counter);
+    document.body.appendChild(modal);
+    
+    setTimeout(() => {
+        modal.style.opacity = '1';
+        const img = imgContainer.querySelector('img');
+        if (img) img.style.transform = 'scale(1)';
+    }, 10);
+    
+    const closeModal = () => {
+        modal.style.opacity = '0';
+        const img = imgContainer.querySelector('img');
+        if (img) img.style.transform = 'scale(0.8)';
+        setTimeout(() => modal.remove(), 300);
+    };
+    
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    
+    closeBtn.addEventListener('click', closeModal);
+    
+    const keyHandler = function(e) {
+        if (e.key === 'Escape') {
+            closeModal();
+            document.removeEventListener('keydown', keyHandler);
+        } else if (e.key === 'ArrowLeft') {
+            navigateSocialLightbox(-1);
+        } else if (e.key === 'ArrowRight') {
+            navigateSocialLightbox(1);
+        }
+    };
+    document.addEventListener('keydown', keyHandler);
+}
+
+function navigateSocialLightbox(direction) {
+    currentSocialIndex += direction;
+    if (currentSocialIndex < 0) currentSocialIndex = currentSocialImages.length - 1;
+    if (currentSocialIndex >= currentSocialImages.length) currentSocialIndex = 0;
+    
+    const imgContainer = document.getElementById('socialImgContainer');
+    const counter = document.getElementById('socialCounter');
+    
+    if (imgContainer) {
+        updateSocialLightboxContent(imgContainer);
+    }
+    if (counter) {
+        counter.textContent = `${currentSocialIndex + 1} / ${currentSocialImages.length}`;
+    }
+}
+
+function updateSocialLightboxContent(container) {
+    const img = currentSocialImages[currentSocialIndex].querySelector('img');
+    
+    container.innerHTML = '';
+    
+    if (img) {
+        const modalImg = document.createElement('img');
+        modalImg.src = img.src;
+        modalImg.alt = img.alt;
+        modalImg.style.cssText = `
+            max-width: 90vw;
+            max-height: 85vh;
+            width: auto;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+            object-fit: contain;
+            display: block;
+            margin: auto;
+        `;
+        container.appendChild(modalImg);
+    }
+}
+
+// Initialize social image click handlers
+document.querySelectorAll('.social-card').forEach(card => {
+    const images = Array.from(card.querySelectorAll('.social-img-item'));
+    images.forEach((item, index) => {
+        item.addEventListener('click', function() {
+            openSocialLightbox(images, index);
+        });
+    });
+});
+
+        // Parallax effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const shapes = document.querySelectorAll('.shape');
+            
+            shapes.forEach((shape, index) => {
+                const rate = scrolled * -0.3 * (index + 1);
+                shape.style.transform = `translateY(${rate}px)`;
+            });
+            
+            // Update navigation active state
+            const sections = document.querySelectorAll('section');
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                if (scrolled >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Hero title animation setup
+        (() => {
+            const el = document.getElementById('heroTitle');
+            if (!el) return;
+            const text = el.textContent;
+            el.textContent = '';
+
+            [...text].forEach((ch, i) => {
+                const s = document.createElement('span');
+                s.textContent = ch === ' ' ? '\u00A0' : ch;
+                s.style.animationDelay = (0.15 * i) + 's';
+                el.appendChild(s);
+            });
+        })();
+
+        // Stats animation
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const number = entry.target.querySelector('.stat-number');
+                    const finalNumber = parseFloat(number.textContent);
+                    let currentNumber = 0;
+                    
+                    const increment = finalNumber / 60;
+                    const timer = setInterval(() => {
+                        currentNumber += increment;
+                        if (currentNumber >= finalNumber) {
+                            number.textContent = finalNumber;
+                            clearInterval(timer);
+                        } else {
+                            number.textContent = Math.floor(currentNumber * 10) / 10;
+                        }
+                    }, 25);
+                }
+            });
+        });
+
+        document.querySelectorAll('.stat-item').forEach(item => {
+            statsObserver.observe(item);
+        });
+
+        // Dynamic background particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.cssText = `
+                position: fixed;
+                width: 3px;
+                height: 3px;
+                background: var(--accent-blue);
+                border-radius: 50%;
+                pointer-events: none;
+                opacity: 0.4;
+                z-index: -1;
+            `;
+            
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = window.innerHeight + 'px';
+            
+            document.body.appendChild(particle);
+            
+            const animation = particle.animate([
+                { transform: 'translateY(0px)', opacity: 0.4 },
+                { transform: `translateY(-${window.innerHeight + 100}px)`, opacity: 0 }
+            ], {
+                duration: Math.random() * 4000 + 3000,
+                easing: 'linear'
+            });
+            
+            animation.addEventListener('finish', () => {
+                particle.remove();
+            });
+        }
+
+        // Create particles periodically
+        setInterval(createParticle, 400);
+
+        // Mobile responsiveness
+        if (window.innerWidth <= 768) {
+            document.body.style.cursor = 'default';
+            if (cursor) cursor.style.display = 'none';
+        }
+
+        // Scroll to top button
+        const scrollBtn = document.getElementById("scrollTopBtn");
+
+        scrollBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) {
+                scrollBtn.style.display = "flex";
+            } else {
+                scrollBtn.style.display = "none";
+            }
+        });
+
+        scrollBtn.style.display = "none";
+
+// Projects Filter Functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectItems = document.querySelectorAll('.project-item');
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active class from all buttons
+            filterBtns.forEach(b => b.classList.remove('active'));
+            // Add active class to clicked button
+            btn.classList.add('active');
+            
+            const filter = btn.getAttribute('data-filter');
+            
+            projectItems.forEach(item => {
+                item.classList.remove('show');
+                
+                setTimeout(() => {
+                    if (filter === 'all') {
+                        item.classList.add('show');
+                    } else if (item.getAttribute('data-category') === filter) {
+                        item.classList.add('show');
+                    }
+                }, 50);
+            });
+        });
+    });
+});
+
+        // FinMate Gallery JavaScript
+let finmateCurrentSlide = 0;
+const finmateTotalSlides = 7;
+
+function moveFinmateSlide(direction) {
+    finmateCurrentSlide += direction;
+    
+    if (finmateCurrentSlide < 0) finmateCurrentSlide = finmateTotalSlides - 1;
+    if (finmateCurrentSlide >= finmateTotalSlides) finmateCurrentSlide = 0;
+    
+    updateFinmateGallery();
+}
+
+function setFinmateSlide(index) {
+    finmateCurrentSlide = index;
+    updateFinmateGallery();
+}
+
+function updateFinmateGallery() {
+    const track = document.getElementById('finmateGalleryTrack');
+    const counter = document.getElementById('finmateCurrentSlide');
+    const dots = document.querySelectorAll('#finmateGalleryDots .project-gallery-dot');
+    
+    if (track) {
+        track.style.transform = `translateX(-${finmateCurrentSlide * 100}%)`;
+    }
+    
+    if (counter) {
+        counter.textContent = finmateCurrentSlide + 1;
+    }
+    
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === finmateCurrentSlide);
+    });
+}
+
+// Initialize dots
+document.addEventListener('DOMContentLoaded', () => {
+    const dotsContainer = document.getElementById('finmateGalleryDots');
+    if (dotsContainer) {
+        for (let i = 0; i < finmateTotalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'project-gallery-dot';
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => setFinmateSlide(i));
+            dotsContainer.appendChild(dot);
+        }
+    }
+    
+    // Add keyboard navigation - works everywhere
+let finmateKeyboardEnabled = true;
+
+document.addEventListener('keydown', (e) => {
+    // Check if user is not typing in input/textarea
+    if (document.activeElement.tagName === 'INPUT' || 
+        document.activeElement.tagName === 'TEXTAREA') {
+        return;
+    }
+    
+    if (finmateKeyboardEnabled) {
+        if (e.key === 'ArrowLeft') {
+            moveFinmateSlide(-1);
+            e.preventDefault();
+        }
+        if (e.key === 'ArrowRight') {
+            moveFinmateSlide(1);
+            e.preventDefault();
+        }
+    }
+});
+
+// Disable keyboard nav when scrolling away from gallery
+window.addEventListener('scroll', () => {
+    const gallery = document.querySelector('.project-gallery-compact');
+    if (gallery) {
+        const rect = gallery.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        finmateKeyboardEnabled = isVisible;
+    }
+});
+    
+    // Add lightbox for gallery images
+    document.querySelectorAll('.project-gallery-slide').forEach(slide => {
+        slide.addEventListener('click', function() {
+            const img = this.querySelector('img');
+            if (!img) return;
+            
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.95);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10002;
+                cursor: zoom-out;
+            `;
+            
+            const modalImg = document.createElement('img');
+            modalImg.src = img.src;
+            modalImg.alt = img.alt;
+            modalImg.style.cssText = `
+                max-width: 95%;
+                max-height: 95vh;
+                border-radius: 10px;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            `;
+            
+            modal.appendChild(modalImg);
+            document.body.appendChild(modal);
+            
+            modal.addEventListener('click', () => modal.remove());
+        });
+    });
+});
+// Simple Lightbox for STEM Internship
+function openSimpleLightbox(element) {
+    const img = element.querySelector('img');
+    if (!img) return;
+    
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.95);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10003;
+        cursor: zoom-out;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    `;
+    
+    const modalImg = document.createElement('img');
+    modalImg.src = img.src;
+    modalImg.alt = img.alt;
+    modalImg.style.cssText = `
+        max-width: 90%;
+        max-height: 90vh;
+        border-radius: 15px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+        transform: scale(0.8);
+        transition: transform 0.3s ease;
+    `;
+    
+    // Close button
+    const closeBtn = document.createElement('button');
+    closeBtn.innerHTML = '×';
+    closeBtn.style.cssText = `
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        background: white;
+        border: none;
+        font-size: 40px;
+        color: #333;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        z-index: 10004;
+    `;
+    
+    closeBtn.addEventListener('mouseenter', () => {
+        closeBtn.style.transform = 'rotate(90deg) scale(1.1)';
+        closeBtn.style.background = '#f44336';
+        closeBtn.style.color = 'white';
+    });
+    
+    closeBtn.addEventListener('mouseleave', () => {
+        closeBtn.style.transform = 'rotate(0deg) scale(1)';
+        closeBtn.style.background = 'white';
+        closeBtn.style.color = '#333';
+    });
+    
+    modal.appendChild(modalImg);
+    modal.appendChild(closeBtn);
+    document.body.appendChild(modal);
+    
+    setTimeout(() => {
+        modal.style.opacity = '1';
+        modalImg.style.transform = 'scale(1)';
+    }, 10);
+    
+    const closeModal = () => {
+        modal.style.opacity = '0';
+        modalImg.style.transform = 'scale(0.8)';
+        setTimeout(() => modal.remove(), 300);
+    };
+    
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    
+    closeBtn.addEventListener('click', closeModal);
+    
+    document.addEventListener('keydown', function escHandler(e) {
+        if (e.key === 'Escape') {
+            closeModal();
+            document.removeEventListener('keydown', escHandler);
+        }
+    });
+}
+    </script>
+</body>
+</html>
